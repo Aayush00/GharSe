@@ -1,0 +1,55 @@
+<nav class="navbar">
+  <!-- Always show logo -->
+  <a routerLink="/" class="logo">GharSeFood</a>
+
+  <!-- Show only when NOT on Chef pages -->
+  <!--<ng-container *ngIf="!isChefPage && !isRegisterChefPage && !isChefDashboard"> -->
+    <div class="nav-center">
+      <div class="location">
+        <span class="icon">📍</span>
+        <select>
+          <option value="">Select Location</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="bangalore">Bangalore</option>
+        </select>
+      </div>
+
+      <div class="search">
+        <span class="icon">🔍</span>
+        <input type="text" placeholder="Search for restaurants, cuisine or dish" />
+      </div>
+    </div>
+
+    <div class="mode-buttons">
+      <button class="mode-btn active">Delivery</button>
+      <button class="mode-btn">Pickup</button>
+    </div>
+  <!--</ng-container> -->
+
+  <!-- Show only for /new-to-us page -->
+  <ng-container *ngIf="isChefPage">
+    <div class="chef-navbar">
+      <!-- Customize navbar for New-to-Us page -->
+      <span>Welcome to Chef Onboarding</span>
+    </div>
+  </ng-container>
+
+  <!-- Show only for /register-a-chef page -->
+  <ng-container *ngIf="isRegisterChefPage">
+    <div class="register-chef-navbar">
+      <!-- Customize navbar for Register-A-Chef page -->
+      <span>Register as a Chef</span>
+    </div>
+  </ng-container>
+
+  <!-- Hamburger (keep only for non-chef pages) -->
+  <div class="hamburger" (click)="toggleMenu()" *ngIf="!isChefPage && !isRegisterChefPage">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Always show Login -->
+  <ul [class.active]="menuOpen" class="nav-links">
+    <li><a routerLink="/login">Login</a></li>
+  </ul>
+</nav>

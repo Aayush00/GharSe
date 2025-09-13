@@ -1,0 +1,28 @@
+<div class="home-food-section">
+  <h2 class="title">🍲 Explore Our Special Dishes</h2>
+
+  <div class="food-container">
+    <div class="food-card" *ngFor="let food of foods">
+      <div class="food-img">
+        <img [src]="food.image" alt="{{ food.name }}" />
+        <div class="rating">⭐ {{ food.rating }}</div>
+      </div>
+
+      <div class="food-details">
+        <h3><i class="fas fa-utensils"></i> {{ food.name }}</h3>
+        <p class="chef-name"><i class="fas fa-user"></i> {{ food.chefName }}</p>
+        <p class="desc"><i class="fas fa-info-circle"></i> {{ food.description }}</p>
+
+        <div class="price">
+          <i class="fas fa-tag"></i> ₹{{ food.price }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading more delicious foods...</p>
+  </div>
+</div>

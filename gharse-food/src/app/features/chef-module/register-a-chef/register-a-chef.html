@@ -1,0 +1,114 @@
+<div class="register-chef-wrapper">
+  <div class="onboarding">
+    <h2>Chef Registration (Step {{step}} of 4)</h2>
+
+    <!-- Step 1: Basic Info -->
+    <div *ngIf="step === 1">
+      <label>Full Name</label>
+      <input [(ngModel)]="chefData.name" placeholder="Enter your name" />
+
+      <label>Email</label>
+      <input [(ngModel)]="chefData.email" placeholder="Enter your email" />
+
+      <label>Location</label>
+      <input [(ngModel)]="chefData.location" placeholder="City / Area" />
+
+      <label>Profile Photo</label>
+      <input type="file" (change)="onProfilePhotoSelected($event)" />
+      <div *ngIf="chefData.profilePhoto" class="preview">
+        <img [src]="chefData.profilePhoto" alt="Profile Preview" />
+      </div>
+
+      <button (click)="nextStep()">Next</button>
+    </div>
+
+    <!-- Step 2: Cuisine & Food -->
+    <div *ngIf="step === 2">
+      <label>Cuisine Type</label>
+      <input [(ngModel)]="chefData.cuisine" placeholder="e.g. Indian, Italian" />
+
+      <label>Specialties</label>
+      <input [(ngModel)]="chefData.specialties" placeholder="Enter specialties" />
+<!--
+      <h3>Food Items</h3>
+      <div *ngFor="let item of chefData.foodItems; let i = index" class="food-item-card">
+        <div>
+          <label>Food Image</label>
+          <input type="file" accept="image/*" (change)="onFoodPhotoSelected($event, i)" />
+          <div *ngIf="item.photo" class="preview">
+            <img [src]="item.photo" alt="Food Preview" />
+          </div>
+        </div>
+
+        <label>Food Name</label>
+        <input [(ngModel)]="item.name" placeholder="Food Name" />
+
+        <label>Description</label>
+        <textarea [(ngModel)]="item.description" placeholder="Short description"></textarea>
+
+        <label>Price (₹)</label>
+        <input type="number" [(ngModel)]="item.price" placeholder="Enter price" />
+
+        <button type="button" (click)="removeFoodItem(i)">❌ Remove</button>
+      </div>
+
+      <button type="button" class="add-btn" (click)="addFoodItem()">➕ Add Food Item</button>
+-->
+      <button (click)="prevStep()">Back</button>
+      <button (click)="nextStep()">Next</button>
+    </div>
+
+    <!-- Step 3: Verification -->
+    <div *ngIf="step === 3">
+      <label>ID Proof</label>
+      <input type="file" (change)="onIdProofSelected($event)" />
+
+      <label>Bank Details</label>
+      <input [(ngModel)]="chefData.bankDetails" placeholder="Account Number / IFSC" />
+
+      <button (click)="prevStep()">Back</button>
+      <button (click)="nextStep()">Next</button>
+    </div>
+<!-- Step 4: Review -->
+<div *ngIf="step === 4" class="review-step">
+  <h3>Review Your Details</h3>
+
+  <div class="review-section">
+    <h4>👤 Basic Info</h4>
+    <p><strong>Name:</strong> {{ chefData.name }}</p>
+    <p><strong>Email:</strong> {{ chefData.email }}</p>
+    <p><strong>Location:</strong> {{ chefData.location }}</p>
+    <div *ngIf="chefData.profilePhoto" class="review-photo">
+      <strong>Profile Photo:</strong><br />
+      <img [src]="chefData.profilePhoto" alt="Profile" />
+    </div>
+  </div>
+
+  <div class="review-section">
+    <h4>🍽️ Cuisine & Specialties</h4>
+    <p><strong>Cuisine:</strong> {{ chefData.cuisine }}</p>
+    <p><strong>Specialties:</strong> {{ chefData.specialties }}</p>
+<!--
+    <h5>Food Items:</h5>
+    <div class="review-food-grid">
+      <div *ngFor="let item of chefData.foodItems" class="review-food-card">
+        <img *ngIf="item.photo" [src]="item.photo" [alt]="item.name" />
+        <p><strong>{{ item.name }}</strong></p>
+        <p>{{ item.description }}</p>
+        <p><strong>₹{{ item.price }}</strong></p>
+      </div>
+    </div>
+  </div>
+-->
+  <div class="review-section">
+    <h4>✅ Verification</h4>
+    <p><strong>ID Proof:</strong> {{ chefData.idProof || 'Not uploaded' }}</p>
+    <p><strong>Bank Details:</strong> {{ chefData.bankDetails }}</p>
+  </div>
+
+  <div class="review-actions">
+    <button (click)="prevStep()">Back</button>
+    <button (click)="submitForm()">Submit</button>
+  </div>
+</div>
+    

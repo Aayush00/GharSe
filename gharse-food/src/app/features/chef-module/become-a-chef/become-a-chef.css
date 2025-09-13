@@ -1,0 +1,76 @@
+/* Hero Section without Image */
+.hero {
+  background: linear-gradient(135deg, #e23744, #ff6b6b);
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+  border-radius: 0 0 40px 40px;
+}
+.hero-content h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+/* Primary Button */
+.primary-btn {
+  background: #fff;
+  color: #e23744;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.primary-btn:hover {
+  background: #f4f4f4;
+  transform: translateY(-2px);
+}
+
+/* Why Chef Section */
+.why-chef {
+  padding: 60px 20px;
+  text-align: center;
+}
+.why-chef h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+.reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.reason {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex: 1 1 250px;
+  max-width: 300px;
+  transition: 0.3s ease;
+}
+.reason:hover {
+  transform: translateY(-5px);
+}
+.reason h3 {
+  margin-bottom: 10px;
+  color: #e23744;
+}
+.reason p {
+  font-size: 14px;
+  color: #555;
+}
+/* Application Form Section */
+.application-form {
+  background: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+}

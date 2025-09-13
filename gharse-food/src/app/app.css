@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Create a full-height grid layout */
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Navbar (if any), content, footer */
+  min-height: 100vh;
+}
+
+/* Container for main content */
+main.container {
+  padding: 20px;
+}

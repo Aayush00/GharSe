@@ -1,0 +1,50 @@
+<div class="menu-container">
+  <h2>🍽️ Menu Management</h2>
+
+  <!-- Dish Cards -->
+  <div class="dishes-grid">
+    <div class="dish-card" *ngFor="let dish of dishes; let i = index">
+      <img *ngIf="dish.imageUrl" [src]="dish.imageUrl" alt="Dish Image">
+      <h3>{{ dish.name }}</h3>
+      <p>{{ dish.category }} • ₹{{ dish.price }}</p>
+      <small>{{ dish.description }}</small>
+      <div class="actions">
+        <button (click)="editDish(i)">✏️ Edit</button>
+        <button (click)="deleteDish(i)">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Add Button -->
+  <button class="floating-btn" (click)="openModal()">+ Add Dish</button>
+
+  <!-- Modal -->
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <h3>{{ editIndex !== null ? 'Edit Dish' : 'Add Dish' }}</h3>
+
+      <form [formGroup]="dishForm" (ngSubmit)="addDish()">
+        <input formControlName="name" placeholder="Dish Name" required>
+        <select formControlName="category">
+          <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+        </select>
+        <input type="number" formControlName="price" placeholder="Price (₹)" required>
+        <textarea formControlName="description" placeholder="Description"></textarea>
+        
+        <!-- Image Upload -->
+        <input type="file" (change)="onFileSelected($event)">
+        <img *ngIf="previewUrl" [src]="previewUrl" class="preview">
+
+        <div class="modal-actions">
+          <button type="submit">Save</button>
+          <button type="button" (click)="closeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Save All Button -->
+  <div class="save-all" *ngIf="dishes.length > 0">
+    <button class="save-btn" (click)="saveAll()">💾 Save All Changes</button>
+  </div>
+</div>

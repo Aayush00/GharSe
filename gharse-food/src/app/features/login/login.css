@@ -1,0 +1,167 @@
+/* FULLSCREEN BACKDROP with Blur */
+.login-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+/* CENTERED MODAL */
+.login-modal {
+  background: #fff;
+  padding: 30px;
+  width: 380px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  overflow-y: auto;
+  max-height: 90%;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  border: none;
+  background: none;
+  color: #555;
+  cursor: pointer;
+}
+.close-btn:hover {
+  color: #e63946;
+}
+
+/* HEADINGS */
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #222;
+  text-align: center;
+}
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.subtitle .link {
+  background: none;
+  border: none;
+  color: #e63946;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 18px;
+}
+label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+}
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  background: #f9f9f9;
+  outline: none;
+}
+input:focus {
+  border-color: #e63946;
+  background: #fff;
+}
+
+/* BUTTONS */
+.btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-login {
+  background: linear-gradient(135deg, #d62828, #f77f00);
+  color: #fff;
+}
+.btn-login:hover {
+  background: linear-gradient(135deg, #b91c1c, #f77f00);
+}
+.btn-verify {
+  background: linear-gradient(135deg, #2a9d8f, #38b2ac);
+  color: #fff;
+}
+.btn-verify:hover {
+  background: linear-gradient(135deg, #21867a, #2a9d8f);
+}
+
+/* STATUS */
+.status {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #e63946;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* TOGGLE */
+.footer-text {
+  margin-top: 24px;
+  font-size: 14px;
+  text-align: center;
+  color: #444;
+}
+.footer-text .link {
+  color: #e63946;
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.footer-text .link:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .login-modal {
+    width: 95%;
+    padding: 20px;
+  }
+  .title {
+    font-size: 20px;
+  }
+}

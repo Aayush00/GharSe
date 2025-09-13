@@ -1,0 +1,125 @@
+/* Section Styling */
+.home-food-section {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fffaf0, #fefefe);
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* Food Cards Grid */
+.food-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.food-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.food-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Image Section */
+.food-img {
+  height: 180px;
+  position: relative;
+}
+.food-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rating {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Food Details */
+.food-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+}
+.food-details h3 {
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.food-details p {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+/* Price Section */
+.price {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+  gap: 6px;
+}
+.price i {
+  font-size: 18px;
+}
+
+/* Loader */
+.loader {
+  text-align: center;
+  margin: 30px 0;
+}
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #27ae60;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}

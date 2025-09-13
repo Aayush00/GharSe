@@ -1,0 +1,45 @@
+<div class="food-block">
+  <!-- Chef Info -->
+  <div class="chef-card">
+    <h3>Chef Aayush</h3>
+    <p>📞 +91 7777877265</p>
+    <p>📍 Shipra Suncity, Ghaziabad</p>
+  </div>
+
+  <!-- Food Grid -->
+  <div class="food-container">
+    <div *ngFor="let food of foods" class="food-card">
+      <div class="food-img">
+        <img [src]="food.image" alt="{{food.name}}" />
+        <span class="rating">{{ food.rating }}</span>
+      </div>
+      <div class="food-details">
+        <h4>{{ food.name }}</h4>
+        <p class="desc">{{ food.description }}</p>
+      </div>
+      <div class="food-actions">
+        <span class="price">₹{{ food.price }}</span>
+        <input type="number" min="1" [(ngModel)]="food.quantity" />
+        <button (click)="addToCart(food)">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Cart Icon -->
+<div class="cart-icon" (click)="toggleCart()">
+  🛒
+  <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+</div>
+
+<!-- Cart Preview -->
+<div class="cart-preview" *ngIf="showCart">
+  <h4>Your Cart</h4>
+  <div *ngFor="let item of cart" class="cart-item">
+    <span>{{ item.name }} (x{{ item.quantity }})</span>
+    <span>₹{{ item.price * item.quantity }}</span>
+  </div>
+  <div class="cart-total">
+    <strong>Total:</strong> ₹{{ getTotal() }}
+  </div>
+</div>

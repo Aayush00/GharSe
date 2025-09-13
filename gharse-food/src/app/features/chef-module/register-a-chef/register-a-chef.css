@@ -1,0 +1,150 @@
+.onboarding {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #e63946;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d62828;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* page fills full screen */
+}
+
+.register-chef-wrapper {
+  flex: 1;           /* pushes footer down */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.onboarding {
+  width: 100%;
+  max-width: 600px;
+}
+.preview img {
+  max-width: 120px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.food-item-card {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #f9f9f9;
+}
+
+.food-item-card img {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.add-btn {
+  background: #28a745;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.add-btn:hover {
+  background: #218838;
+}
+.review-step {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.review-section {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-section h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.review-photo img {
+  max-width: 150px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.review-food-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.review-food-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.review-food-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.review-actions {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .onboarding {
+    padding: 15px;
+    margin: 15px;
+  }
+}

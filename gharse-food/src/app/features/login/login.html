@@ -1,0 +1,63 @@
+<!-- Centered Login Modal -->
+<div class="login-modal-container" *ngIf="showLogin">
+  <div class="login-modal">
+    <button class="close-btn" (click)="closeLogin()">×</button>
+
+    <h2 class="title" *ngIf="!otpSent">{{ isSignUp ? 'Create Account' : 'Login' }}</h2>
+    <h2 class="title" *ngIf="otpSent">Verify OTP</h2>
+
+    <p class="subtitle" *ngIf="otpSent">
+      OTP sent to <strong>{{ maskedMobile }}</strong>
+      <button class="link" type="button" (click)="editNumber()">Change</button>
+    </p>
+
+    <!-- Phone + Signup Fields -->
+    <div class="form-group" *ngIf="!otpSent">
+      <label for="mobile">Phone Number</label>
+      <input
+        type="text"
+        id="mobile"
+        [(ngModel)]="mobileNumber"
+        maxlength="10"
+        (keypress)="allowOnlyNumbers($event)"
+        placeholder="Enter 10-digit number"
+      />
+
+      <div *ngIf="isSignUp">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" [(ngModel)]="fullName" placeholder="Your full name" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="email" placeholder="Your email address" />
+      </div>
+
+      <button class="btn btn-login" (click)="sendOtp()">
+        {{ isSignUp ? 'Sign Up' : 'Login' }}
+      </button>
+    </div>
+
+    <!-- OTP Entry -->
+    <div class="form-group" *ngIf="otpSent">
+      <label for="otp">Enter OTP</label>
+      <input
+        type="text"
+        id="otp"
+        [(ngModel)]="otp"
+        maxlength="6"
+        (keypress)="allowOnlyNumbers($event)"
+        placeholder="6-digit OTP"
+      />
+      <button class="btn btn-verify" (click)="verifyOtp()">Verify OTP</button>
+    </div>
+
+    <div class="status">{{ statusMessage }}</div>
+
+    <!-- Toggle -->
+    <p class="footer-text" *ngIf="!otpSent">
+      {{ isSignUp ? 'Already have an account?' : "Don't have an account?" }}
+      <button class="link" (click)="toggleSignUp()">
+        {{ isSignUp ? 'Login' : 'Create an account' }}
+      </button>
+    </p>
+  </div>
+</div>
