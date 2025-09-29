@@ -49,8 +49,10 @@ public class ChefDetails {
     @Column(name = "\"endTime\"")
     private LocalTime endTime;
 
-    @Column(name ="\"onboardingStage\"" )
-    private String onboardingStage;
+   /* @Column(name ="\"onboardingStage\"" )
+    private String onboardingStage; */
+   @Column(name = "\"location\"")
+   private String location;
 
     @Column(name ="\"bankAccountDetails\"" )
     private String bankAccountDetails;
