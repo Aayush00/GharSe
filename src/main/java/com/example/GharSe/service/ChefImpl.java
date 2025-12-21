@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class ChefImpl implements ChefImplementation{
@@ -25,7 +26,8 @@ public class ChefImpl implements ChefImplementation{
         chefDetails.setChefMobileNumber(req.getChefMobileNumber());
         chefDetails.setStartTime(req.getStartTime());
         chefDetails.setEndTime(req.getEndTime());
-        chefDetails.setChefId(String.valueOf(req.getChefEmailId()+req.getChefMobileNumber()));
+        //chefDetails.setChefId(UUID.randomUUID().toString());
+        chefDetails.setChefId(String.valueOf("Chef 1"));
         //chefDetails.setOnboardingStage("Registration Completed");
         chefDetails.setBankAccountDetails(req.getBankAccountDetails());
         chefDetails.setLocation(req.getLocation());
@@ -40,22 +42,43 @@ public class ChefImpl implements ChefImplementation{
 
     }
 
+/*    isChefOverride
+:
+        false
+    isManuallyAvailable
+:
+        false*/  //disable
+
+/*    isChefOverride
+:
+        false
+    isManuallyAvailable  Quantity
+:
+        true*/  //time + quatity available
+
+/*    isChefOverride
+:
+        true
+    isManuallyAvailable
+:
+        true*/   //  time exccesed + quantity >0 +both true enable
+
 
     @Override
     public void chefMenuList(ChefMenu req) {
         ChefMenu chefMenu= new ChefMenu();
-        chefMenu.setAvailable(true);
         chefMenu.setMenuName(req.getMenuName());
         chefMenu.setDescription(req.getDescription());
         chefMenu.setMenuType(req.getMenuType());
         chefMenu.setPrice(req.getPrice());
         chefMenu.setEndTime(req.getEndTime());
         chefMenu.setStartTime(req.getStartTime());
-        //token login
-        //chefMenu.setChefId();
+        if(chefMenu.isChefAvailable()){
+            chefMenu.setAvailable(true);
+        }
+        chefMenu.setAvailable(false);
+        chefMenu.setChefId(req.getChefId());
         chefMenu.setPrice(req.getPrice());
-        //token
-        //chefMenu.setCreatedBy();
     }
 
 }

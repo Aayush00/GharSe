@@ -30,6 +30,7 @@ public class ChefController {
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "Chef Register Successfully :-), Pending with Admin Approval !!!");
+        response.put("chefId",req.getChefId());
         return ResponseEntity.ok(response);
     }
 

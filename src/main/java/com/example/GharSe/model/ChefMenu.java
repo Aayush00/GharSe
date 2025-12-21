@@ -11,9 +11,14 @@ import java.time.LocalTime;
 @Entity
 public class ChefMenu {
 
+
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
+
+        @Column(name = "\"quantity\"")
+        private long quantity;
 
         @Column(name ="\"chefId\"" )
         private String chefId;
@@ -50,6 +55,9 @@ public class ChefMenu {
 
         @Column(name ="\"isAvailable\"" )
         private boolean isAvailable;
+
+        @Column(name = "\"isChefAvailable\"")
+    private boolean isChefAvailable;
 
 
     }
