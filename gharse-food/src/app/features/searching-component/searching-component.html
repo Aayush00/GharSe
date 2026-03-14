@@ -1,0 +1,40 @@
+<div class="search-page">
+
+  <h2>
+    Search results for "<span>{{ query }}</span>"
+  </h2>
+
+  <div *ngIf="loading" class="loading">
+    Loading...
+  </div>
+
+  <!-- DISH RESULTS -->
+  <section *ngIf="!loading && dishes.length">
+    <h3>Dishes</h3>
+
+    <div class="search-item" *ngFor="let d of dishes">
+      <div class="title">{{ d.itemName }}</div>
+      <div class="sub">
+        ₹{{ d.price }} • from {{ d.chefName }}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEF RESULTS -->
+  <section *ngIf="!loading && chefs.length">
+    <h3>Restaurants</h3>
+
+    <div class="search-item" *ngFor="let c of chefs">
+      <div class="title">{{ c.chefName }}</div>
+      <div class="sub">
+        ⭐ {{ c.rating }} • {{ c.location }}
+      </div>
+    </div>
+  </section>
+
+  <!-- NO RESULTS -->
+  <div *ngIf="!loading && !dishes.length && !chefs.length">
+    No results found.
+  </div>
+
+</div>

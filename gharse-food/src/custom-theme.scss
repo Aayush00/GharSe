@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+// Load Material core styles
+@include mat.core();
+
+// Define your custom Material 3 theme
+$my-theme: mat.define-theme((
+  color: (
+    theme-type: light, // or 'dark'
+    primary: mat.$cyan-palette,
+    tertiary: mat.$orange-palette, // acts like accent in M3
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    plain-family: 'Inter',
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+// Export the theme so styles.scss can use it
+:root {
+  @include mat.all-component-themes($my-theme);
+}

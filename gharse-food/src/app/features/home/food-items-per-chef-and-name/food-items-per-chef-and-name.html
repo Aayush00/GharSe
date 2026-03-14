@@ -1,0 +1,73 @@
+<div class="restaurant-page">
+  <header class="restaurant-header">
+    <h1>Chef {{ chefId }}</h1>
+    <p class="subtitle">Homemade food • Fresh • Hygienic</p>
+  </header>
+
+  <div *ngIf="!isLoading" class="menu-layout">
+    <aside class="categories">
+      <div
+        *ngFor="let cat of categoryCounts"
+        class="category-item"
+        [class.active]="activeCategory === cat.category"
+        (click)="scrollToCategory(cat.category)"
+      >
+        {{ cat.category }}
+        <span class="cat-count">{{ cat.count }}</span>
+      </div>
+    </aside>
+
+    <section class="menu-items">
+      <div *ngFor="let cat of orderedCategories" class="category-section" [id]="cat.category">
+        <h2>{{ cat.category }}</h2>
+
+        <div *ngFor="let item of cat.items" class="menu-card">
+          <div>
+            <h3>{{ item.name }}</h3>
+            <p>₹{{ item.price }}</p>
+          </div>
+
+          <div class="action-area">
+
+  <button
+    *ngIf="item.quantity === 0"
+    class="add-btn"
+    (click)="addItem(item)">
+    ADD
+  </button>
+
+  <div *ngIf="item.quantity > 0" class="quantity-box">
+    <button (click)="decrement(item)">−</button>
+    <span>{{ item.quantity }}</span>
+    <button (click)="increment(item)">+</button>
+  </div>
+
+</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- FLOATING CART -->
+  <div class="floating-cart" *ngIf="cartCount > 0" (click)="openCartSelector()">
+    <span>{{ cartCount }} items</span>
+    <span>View Cart</span>
+  </div>
+
+  <!-- CHEF SELECTOR -->
+  <div
+    class="chef-selector-backdrop"
+    *ngIf="showChefSelector"
+    (click)="showChefSelector = false"
+  ></div>
+
+  <div class="chef-selector" *ngIf="showChefSelector">
+    <h3>Select Chef</h3>
+
+    <div class="chef-option" *ngFor="let chef of chefSummary" (click)="openChefCart(chef.chefId)">
+      <span>{{ chef.chefName }}</span>
+      <span class="count">{{ chef.count }} items</span>
+    </div>
+  </div>
+
+  <button class="scroll-to-top" *ngIf="showScrollTop" (click)="scrollToTop()">↑</button>
+</div>

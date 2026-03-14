@@ -1,114 +1,109 @@
-<div class="register-chef-wrapper">
-  <div class="onboarding">
-    <h2>Chef Registration (Step {{step}} of 4)</h2>
+<div class="registration-wrapper">
+  <h2>Chef Registration</h2>
 
-    <!-- Step 1: Basic Info -->
-    <div *ngIf="step === 1">
-      <label>Full Name</label>
-      <input [(ngModel)]="chefData.name" placeholder="Enter your name" />
-
-      <label>Email</label>
-      <input [(ngModel)]="chefData.email" placeholder="Enter your email" />
-
-      <label>Location</label>
-      <input [(ngModel)]="chefData.location" placeholder="City / Area" />
-
-      <label>Profile Photo</label>
-      <input type="file" (change)="onProfilePhotoSelected($event)" />
-      <div *ngIf="chefData.profilePhoto" class="preview">
-        <img [src]="chefData.profilePhoto" alt="Profile Preview" />
-      </div>
-
-      <button (click)="nextStep()">Next</button>
-    </div>
-
-    <!-- Step 2: Cuisine & Food -->
-    <div *ngIf="step === 2">
-      <label>Cuisine Type</label>
-      <input [(ngModel)]="chefData.cuisine" placeholder="e.g. Indian, Italian" />
-
-      <label>Specialties</label>
-      <input [(ngModel)]="chefData.specialties" placeholder="Enter specialties" />
-<!--
-      <h3>Food Items</h3>
-      <div *ngFor="let item of chefData.foodItems; let i = index" class="food-item-card">
-        <div>
-          <label>Food Image</label>
-          <input type="file" accept="image/*" (change)="onFoodPhotoSelected($event, i)" />
-          <div *ngIf="item.photo" class="preview">
-            <img [src]="item.photo" alt="Food Preview" />
-          </div>
-        </div>
-
-        <label>Food Name</label>
-        <input [(ngModel)]="item.name" placeholder="Food Name" />
-
-        <label>Description</label>
-        <textarea [(ngModel)]="item.description" placeholder="Short description"></textarea>
-
-        <label>Price (₹)</label>
-        <input type="number" [(ngModel)]="item.price" placeholder="Enter price" />
-
-        <button type="button" (click)="removeFoodItem(i)">❌ Remove</button>
-      </div>
-
-      <button type="button" class="add-btn" (click)="addFoodItem()">➕ Add Food Item</button>
--->
-      <button (click)="prevStep()">Back</button>
-      <button (click)="nextStep()">Next</button>
-    </div>
-
-    <!-- Step 3: Verification -->
-    <div *ngIf="step === 3">
-      <label>ID Proof</label>
-      <input type="file" (change)="onIdProofSelected($event)" />
-
-      <label>Bank Details</label>
-      <input [(ngModel)]="chefData.bankDetails" placeholder="Account Number / IFSC" />
-
-      <button (click)="prevStep()">Back</button>
-      <button (click)="nextStep()">Next</button>
-    </div>
-<!-- Step 4: Review -->
-<div *ngIf="step === 4" class="review-step">
-  <h3>Review Your Details</h3>
-
-  <div class="review-section">
-    <h4>👤 Basic Info</h4>
-    <p><strong>Name:</strong> {{ chefData.name }}</p>
-    <p><strong>Email:</strong> {{ chefData.email }}</p>
-    <p><strong>Location:</strong> {{ chefData.location }}</p>
-    <div *ngIf="chefData.profilePhoto" class="review-photo">
-      <strong>Profile Photo:</strong><br />
-      <img [src]="chefData.profilePhoto" alt="Profile" />
+  <!-- Stepper -->
+  <div class="stepper">
+    <div
+      class="step"
+      *ngFor="let s of [1,2,3,4,5]"
+      [class.active]="step >= s"
+      (click)="jumpToStep(s)"
+    >
+      <div class="circle">{{ s }}</div>
+      <span *ngIf="s===1">Basic</span>
+      <span *ngIf="s===2">Work</span>
+      <span *ngIf="s===3">Timing</span>
+      <span *ngIf="s===4">Bank</span>
+      <span *ngIf="s===5">Review</span>
     </div>
   </div>
 
-  <div class="review-section">
-    <h4>🍽️ Cuisine & Specialties</h4>
-    <p><strong>Cuisine:</strong> {{ chefData.cuisine }}</p>
-    <p><strong>Specialties:</strong> {{ chefData.specialties }}</p>
-<!--
-    <h5>Food Items:</h5>
-    <div class="review-food-grid">
-      <div *ngFor="let item of chefData.foodItems" class="review-food-card">
-        <img *ngIf="item.photo" [src]="item.photo" [alt]="item.name" />
-        <p><strong>{{ item.name }}</strong></p>
-        <p>{{ item.description }}</p>
-        <p><strong>₹{{ item.price }}</strong></p>
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="(step-1)/4*100"></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div *ngIf="step===1" class="form-step">
+    <label>Name</label>
+    <input [(ngModel)]="chefData.name" placeholder="Enter your full name" />
+    <p class="error" *ngIf="errors['name']">{{ errors['name'] }}</p>
+
+    <label>Email</label>
+    <input [(ngModel)]="chefData.email" placeholder="Enter your email" />
+    <p class="error" *ngIf="errors['email']">{{ errors['email'] }}</p>
+
+    <label>Mobile Number</label>
+    <input [(ngModel)]="chefData.mobileNumber" placeholder="Enter your mobile number" />
+    <p class="error" *ngIf="errors['mobileNumber']">{{ errors['mobileNumber'] }}</p>
+
+    <label>Profile Photo (optional)</label>
+    <div class="profile-row">
+      <input type="file" accept="image/*" (change)="onProfilePhotoSelected($event)" />
+      <div class="profile-preview" *ngIf="chefData.profilePhoto">
+        <img [src]="chefData.profilePhoto" alt="Profile preview" />
       </div>
     </div>
   </div>
--->
-  <div class="review-section">
-    <h4>✅ Verification</h4>
-    <p><strong>ID Proof:</strong> {{ chefData.idProof || 'Not uploaded' }}</p>
-    <p><strong>Bank Details:</strong> {{ chefData.bankDetails }}</p>
+
+  <!-- Step 2 -->
+  <div *ngIf="step===2" class="form-step">
+    <label>Specialty</label>
+    <input [(ngModel)]="chefData.specialty" placeholder="e.g. North Indian, Italian" />
+    <p class="error" *ngIf="errors['specialty']">{{ errors['specialty'] }}</p>
+
+    <label>Location</label>
+    <input [(ngModel)]="chefData.location" placeholder="Enter your kitchen location" />
+    <p class="error" *ngIf="errors['location']">{{ errors['location'] }}</p>
   </div>
 
-  <div class="review-actions">
-    <button (click)="prevStep()">Back</button>
-    <button (click)="submitForm()">Submit</button>
+  <!-- Step 3 -->
+  <div *ngIf="step===3" class="form-step">
+    <label>Start Time</label>
+    <input type="time" [(ngModel)]="chefData.startTime" />
+    <p class="error" *ngIf="errors['startTime']">{{ errors['startTime'] }}</p>
+
+    <label>End Time</label>
+    <input type="time" [(ngModel)]="chefData.endTime" />
+    <p class="error" *ngIf="errors['endTime']">{{ errors['endTime'] }}</p>
+  </div>
+
+  <!-- Step 4 -->
+  <div *ngIf="step===4" class="form-step">
+    <label>Bank Account Details</label>
+    <textarea
+      [(ngModel)]="chefData.bankAccountDetails"
+      placeholder="Enter bank account number, IFSC, etc."
+    ></textarea>
+    <p class="error" *ngIf="errors['bankAccountDetails']">{{ errors['bankAccountDetails'] }}</p>
+  </div>
+
+  <!-- Step 5 -->
+  <div *ngIf="step===5" class="form-step review">
+    <h3>Review Your Details</h3>
+    <ul>
+      <li><strong>Name:</strong> {{ chefData.name }}</li>
+      <li><strong>Email:</strong> {{ chefData.email }}</li>
+      <li><strong>Mobile:</strong> {{ chefData.mobileNumber }}</li>
+      <li><strong>Specialty:</strong> {{ chefData.specialty }}</li>
+      <li><strong>Location:</strong> {{ chefData.location }}</li>
+      <li><strong>Start Time:</strong> {{ chefData.startTime }}</li>
+      <li><strong>End Time:</strong> {{ chefData.endTime }}</li>
+      <li><strong>Bank Details:</strong> {{ chefData.bankAccountDetails }}</li>
+    </ul>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button *ngIf="step>1" (click)="prevStep()">Back</button>
+    <button *ngIf="step<5" (click)="nextStep()">Next</button>
+    <button *ngIf="step===5" class="submit" (click)="submitForm()">
+      ✅ Submit Registration
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Submitting your details...</p>
   </div>
 </div>
-    

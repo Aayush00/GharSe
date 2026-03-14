@@ -1,10 +1,29 @@
 <app-navbar></app-navbar>
 
-<!-- Hero Section -->
-<section class="hero">
+<!-- HERO SECTION -->
+<!-- <section class="hero">
   <div class="hero-content">
     <h1>Delicious food delivered to your door</h1>
     <p>Search for restaurants, dishes, or cuisines near you</p>
+
+    <div class="hero-search">
+      <input type="text" placeholder="Search for restaurants, cuisine or dish" />
+      <button>Search</button>
+    </div>
+  </div>
+</section> -->
+<section class="hero">
+  <div
+    class="hero-slide"
+    *ngFor="let img of heroImages; let i = index"
+    [class.active]="i === currentImageIndex"
+    [ngStyle]="{ 'background-image': 'url(' + img + ')' }"
+  ></div>
+
+  <div class="hero-content">
+    <h1>Delicious food delivered to your door</h1>
+    <p>Search for restaurants, dishes, or cuisines near you</p>
+
     <div class="hero-search">
       <input type="text" placeholder="Search for restaurants, cuisine or dish" />
       <button>Search</button>
@@ -12,39 +31,36 @@
   </div>
 </section>
 
-<!-- Categories -->
+<!-- CATEGORIES -->
 <section class="categories">
   <h2>Popular Homemade Categories</h2>
+
   <div class="category-cards">
     <div class="card">Indian</div>
     <div class="card">Continental</div>
     <div class="card">Snacks</div>
     <div class="card">Desserts</div>
     <div class="card">Healthy</div>
-
   </div>
 </section>
 
-<!-- Top Chefs -->
-<section class="restaurants">
+<!-- TOP CHEFS -->
+<section class="restaurants" *ngIf="chefs.length">
   <h2>Top Home Chefs</h2>
+
   <div class="restaurant-grid">
-    <div class="restaurant-card">Chef A</div>
-    <div class="restaurant-card">Chef B</div>
-    <div class="restaurant-card">Chef C</div>
-    <div class="restaurant-card">Chef D</div>
+    <div class="restaurant-card" *ngFor="let chef of chefs" (click)="openChefMenu(chef.id)">
+      {{ chef.name }}
+    </div>
   </div>
 </section>
 
-<!-- Food List + Cart -->
+<!-- FOOD LIST -->
 <section class="content-with-cart">
   <div class="food-list-area">
     <app-home-display-food></app-home-display-food>
   </div>
-  <!--<div class="cart-area">
-    <app-cart></app-cart>
-  </div> -->
 </section>
 
-<router-outlet></router-outlet>
+
 <app-footer></app-footer>

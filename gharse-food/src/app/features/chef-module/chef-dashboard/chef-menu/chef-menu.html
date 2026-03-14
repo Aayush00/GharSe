@@ -1,50 +1,110 @@
 <div class="menu-container">
-  <h2>🍽️ Menu Management</h2>
+  <h2>Menu Management</h2>
 
-  <!-- Dish Cards -->
   <div class="dishes-grid">
-    <div class="dish-card" *ngFor="let dish of dishes; let i = index">
-      <img *ngIf="dish.imageUrl" [src]="dish.imageUrl" alt="Dish Image">
+    <div
+      class="dish-card"
+      *ngFor="let dish of dishes; let i = index"
+      [class.greyed-out]="!getAvailability(dish).available"
+    >
+      <img *ngIf="dish.imageUrl" [src]="dish.imageUrl" />
+
       <h3>{{ dish.name }}</h3>
-      <p>{{ dish.category }} • ₹{{ dish.price }}</p>
+
+      <!-- STATUS -->
+      <span
+        class="status-badge"
+        [ngClass]="{
+          available: getAvailability(dish).available,
+          unavailable: !getAvailability(dish).available
+        }"
+      >
+        {{ getAvailability(dish).label }}
+      </span>
+
+      <!-- CHEF TOGGLE (ALWAYS ENABLED) -->
+      <mat-slide-toggle
+        [checked]="dish.isChefAvailable"
+        (change)="toggleAvailability(dish, $event.checked)"
+      >
+        Chef Availability
+      </mat-slide-toggle>
+
+      <p class="meta">
+        <span>{{ dish.category }}</span>
+        <span>₹{{ dish.price }}</span>
+      </p>
+
       <small>{{ dish.description }}</small>
+
+      <p class="info">
+        ⏱ {{ dish.preparationTime }} mins | 🌶 {{ dish.spiceLevel }}/5
+      </p>
+
+      <p class="info">
+        🔥 {{ dish.calories }} cal |
+        ⏰ {{ dish.startTime }} - {{ dish.endTime }}
+      </p>
+
       <div class="actions">
-        <button (click)="editDish(i)">✏️ Edit</button>
-        <button (click)="deleteDish(i)">🗑️ Delete</button>
+        <button (click)="editDish(i)">Edit</button>
+        <button (click)="deleteDish(i)">Delete</button>
       </div>
     </div>
   </div>
 
-  <!-- Floating Add Button -->
-  <button class="floating-btn" (click)="openModal()">+ Add Dish</button>
+  <button class="floating-btn" (click)="openModal()">+</button>
 
-  <!-- Modal -->
+  <!-- MODAL -->
   <div class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
       <h3>{{ editIndex !== null ? 'Edit Dish' : 'Add Dish' }}</h3>
 
-      <form [formGroup]="dishForm" (ngSubmit)="addDish()">
-        <input formControlName="name" placeholder="Dish Name" required>
+      <form [formGroup]="dishForm" (ngSubmit)="saveDish()" class="dish-form">
+
+        <input formControlName="name" placeholder="Dish Name" />
         <select formControlName="category">
-          <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+          <option value="" disabled>Select Category</option>
+          <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
         </select>
-        <input type="number" formControlName="price" placeholder="Price (₹)" required>
-        <textarea formControlName="description" placeholder="Description"></textarea>
-        
-        <!-- Image Upload -->
-        <input type="file" (change)="onFileSelected($event)">
-        <img *ngIf="previewUrl" [src]="previewUrl" class="preview">
+
+        <input type="number" formControlName="price" placeholder="Price (₹)" />
+        <input type="number" formControlName="preparationTime" placeholder="Preparation Time (mins)" />
+
+        <input type="number" formControlName="spiceLevel" placeholder="Spice Level (1–5)" />
+        <input type="number" formControlName="calories" placeholder="Calories" />
+        <input type="number" formControlName="discount" placeholder="Discount" />
+        <input type="text" formControlName="chefId" placeholder="Chef ID" />
+
+        <input type="number" formControlName="servings" placeholder="Servings" />
+        <input type="number" formControlName="availableQuantity" placeholder="Quantity" />
+
+        <div class="time-group">
+          <input type="time" formControlName="startTime" />
+          <input type="time" formControlName="endTime" />
+        </div>
+
+        <textarea
+          formControlName="description"
+          placeholder="Description"
+        ></textarea>
+
+        <div class="file-group">
+          <input type="file" (change)="onFileSelected($event)" />
+        </div>
+
+        <img *ngIf="previewUrl" [src]="previewUrl" class="preview" />
 
         <div class="modal-actions">
           <button type="submit">Save</button>
           <button type="button" (click)="closeModal()">Cancel</button>
         </div>
+
       </form>
     </div>
   </div>
 
-  <!-- Save All Button -->
-  <div class="save-all" *ngIf="dishes.length > 0">
-    <button class="save-btn" (click)="saveAll()">💾 Save All Changes</button>
+  <div class="save-all" *ngIf="dishes.length">
+    <button class="save-btn" (click)="saveAll()">Save All</button>
   </div>
 </div>

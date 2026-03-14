@@ -1,34 +1,61 @@
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
-import { CartItem, CartService } from '../../../services/cart.service';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartService, CartItem } from './cart.service';
 
 @Component({
+  standalone: true,
   selector: 'app-cart',
-   standalone: true,
   imports: [CommonModule],
   templateUrl: './cart.html',
-  styleUrl: './cart.css'
+  styleUrl: './cart.css',
 })
-export class Cart implements OnDestroy {
+export class Cart implements OnInit {
+  chefId!: string;
+  chefName = '';
   items: CartItem[] = [];
-  sub: Subscription;
-  mobileOpen = false;
+  total = 0;
 
-  constructor(private cart: CartService) {
-    this.sub = this.cart.cart$.subscribe(it => this.items = it);
+  constructor(
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    // 🔥 Wait for query param first
+    this.route.queryParamMap.subscribe((params) => {
+      const id = params.get('chefId');
+
+      if (!id) {
+        //this.router.navigate(['/']);
+        return;
+      }
+
+      this.chefId = id;
+
+      // 🔥 Then subscribe to cart
+      this.cartService.getCart().subscribe((cart) => {
+        const chefItems = cart.filter((item) => String(item.chefId) === String(this.chefId));
+
+        this.items = chefItems;
+
+        this.total = chefItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        this.chefName = chefItems.length > 0 ? chefItems[0].chefName : `Chef ${this.chefId}`;
+      });
+    });
   }
 
-  ngOnDestroy() { this.sub.unsubscribe(); }
+  increment(item: CartItem) {
+    this.cartService.updateQuantity(item.id, item.chefId, item.quantity + 1);
+  }
 
-  increase(i: CartItem) { this.cart.changeQuantity(i.id, +1); }
-  decrease(i: CartItem) { this.cart.changeQuantity(i.id, -1); }
-  remove(i: CartItem) { this.cart.removeItem(i.id); }
-  clear() { this.cart.clearCart(); }
-  get total() { return this.cart.getTotal(); }
+  decrement(item: CartItem) {
+    this.cartService.updateQuantity(item.id, item.chefId, item.quantity - 1);
+  }
 
-  toggleMobile() { this.mobileOpen = !this.mobileOpen; 
-    
-  } 
-
+  addMoreItems() {
+    this.router.navigate(['/restaurant', this.chefId]);
+  }
 }

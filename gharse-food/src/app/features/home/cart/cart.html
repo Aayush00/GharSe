@@ -1,34 +1,32 @@
-<div class="cart-wrapper" [class.open]="mobileOpen">
-  <div class="cart-header">
-    <h3>Your Cart</h3>
-    <button class="close-mobile" (click)="toggleMobile()">×</button>
-  </div>
+<div class="cart-wrapper">
+  <div class="cart-page">
+    <h2>{{ chefName }}</h2>
+    <p class="subtitle">Homemade food • Fresh • Hygienic</p>
 
-  <div *ngIf="items.length === 0" class="empty">No items in cart</div>
+    <div *ngFor="let item of items" class="cart-item">
+      <img [src]="item.imageUrl || 'assets/food-placeholder.png'" />
 
-  <div class="cart-item" *ngFor="let it of items">
-    <img [src]="it.image" alt="{{it.name}}" />
-    <div class="meta">
-      <div class="name">{{ it.name }}</div>
-      <div class="price">₹{{ it.price }} × {{ it.quantity }} = ₹{{ it.price * it.quantity }}</div>
-      <div class="controls">
-        <button (click)="decrease(it)">−</button>
-        <span class="qty">{{ it.quantity }}</span>
-        <button (click)="increase(it)">+</button>
-        <button class="remove" (click)="remove(it)">Remove</button>
+      <div class="details">
+        <h4>{{ item.name }}</h4>
+        <p>₹{{ item.price }}</p>
+
+        <div class="stepper">
+          <button (click)="decrement(item)">−</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increment(item)">+</button>
+        </div>
+      </div>
+
+      <div class="amount">₹{{ item.price * item.quantity }}</div>
+    </div>
+
+    <div class="footer">
+      <button class="add-more" (click)="addMoreItems()">+ Add more items</button>
+
+      <div class="checkout-section">
+        <span class="total">Total: ₹{{ total }}</span>
+        <button class="checkout">Proceed to Checkout</button>
       </div>
     </div>
   </div>
-
-  <div class="cart-footer" *ngIf="items.length > 0">
-    <div class="total">Total: ₹{{ total }}</div>
-    <div class="cta">
-      <button class="clear" (click)="clear()">Clear</button>
-      <button class="checkout">Checkout</button>
-    </div>
-  </div>
 </div>
-
-<button class="cart-fab" (click)="toggleMobile()">
-  🛒 <span *ngIf="items.length">({{ items.length }})</span>
-</button>

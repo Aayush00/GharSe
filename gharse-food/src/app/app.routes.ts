@@ -14,6 +14,8 @@ import { ChefEarnings } from './features/chef-module/chef-dashboard/chef-earning
 import { ChefProfile } from './features/chef-module/chef-dashboard/chef-profile/chef-profile';
 import { FoodList } from './features/food-list/food-list';
 import { Cart } from './features/home/cart/cart';
+import { FoodItemsPerChefAndName } from './features/home/food-items-per-chef-and-name/food-items-per-chef-and-name';
+import { SearchingComponent } from './features/searching-component/searching-component';
 
 export const routes: Routes = [
   // Public / Customer routes
@@ -23,6 +25,8 @@ export const routes: Routes = [
   { path: 'register-a-chef', component: RegisterAChef },
   {path: 'food', component: FoodList},
   {path: 'cart', component: Cart},
+  {path: 'restaurant/:chefId',  component: FoodItemsPerChefAndName},
+  {path: 'search', component: SearchingComponent},
 
   // Chef routes with layout
   {

@@ -1,203 +1,327 @@
+/* ===============================
+   GLOBAL / PAGE
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
 .menu-container {
   padding: 2rem;
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
+  background: #f5f6f8;
+  font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
 }
 
 .menu-container h2 {
+  text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 1.5rem;
   font-weight: 600;
+  margin-bottom: 2rem;
 }
+
+/* ===============================
+   GRID LAYOUT
+================================ */
 
 .dishes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
+/* ===============================
+   DISH CARD
+================================ */
+
 .dish-card {
-  background: #fff;
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 14px;
   padding: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
   position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .dish-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
+
+/* ===============================
+   IMAGE
+================================ */
 
 .dish-card img {
   width: 100%;
-  height: 140px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  margin-bottom: 0.6rem;
 }
 
+/* ===============================
+   TITLE / META
+================================ */
+
 .dish-card h3 {
-  margin: 0.25rem 0;
+  margin: 0.4rem 0 0.3rem;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.dish-card p {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
-.dish-card small {
-  display: block;
-  color: #888;
-  margin: 0.5rem 0;
+.info {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.2rem;
 }
+
+small {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ===============================
+   STATUS BADGE
+================================ */
+
+.status-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-bottom: 0.4rem;
+}
+
+.available {
+  background: #e6f7ee;
+  color: #1e8449;
+}
+
+.unavailable {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+.override {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* ===============================
+   TOGGLE
+================================ */
+
+mat-slide-toggle {
+  margin: 0.4rem 0 0.6rem;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
 
 .actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: auto;
 }
 
 .actions button {
   border: none;
-  background: none;
+  background: #f2f2f2;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
-  color: #555;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  transition: 0.3s;
+  transition: background 0.2s ease;
 }
 
 .actions button:hover {
-  background: #f0f0f0;
+  background: #e0e0e0;
 }
+
+/* ===============================
+   GREYED OUT (WORKING)
+================================ */
+
+.greyed-out::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  z-index: 1;
+}
+
+.greyed-out > * {
+  position: relative;
+  z-index: 2;
+}
+
+.greyed-out img {
+  filter: grayscale(100%) brightness(0.8);
+}
+
+/* ===============================
+   FLOATING ADD BUTTON
+================================ */
 
 .floating-btn {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background: #ff6f61;
-  color: #fff;
-  border: none;
-  padding: 1rem 1.2rem;
-  font-size: 1rem;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
+  background: #ff6f61;
+  color: #ffffff;
+  font-size: 2rem;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: 0.3s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .floating-btn:hover {
   background: #e85b4d;
 }
 
-/* Modal */
+/* ===============================
+   SAVE ALL
+================================ */
+
+.save-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.save-btn {
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.save-btn:hover {
+  background: #0056b3;
+}
+
+/* ===============================
+   MODAL OVERLAY
+================================ */
+
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
+/* ===============================
+   MODAL CONTENT
+================================ */
+
 .modal-content {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  animation: fadeIn 0.3s ease;
+  background: #ffffff;
+  padding: 1.8rem;
+  width: 520px;
+  max-width: 95%;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modal-content h3 {
   margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 
-.modal-content form {
-  display: flex;
-  flex-direction: column;
+/* ===============================
+   MODAL FORM (GRID)
+================================ */
+
+.dish-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 }
 
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-  padding: 0.6rem;
-  border: 1px solid #ccc;
+.dish-form input,
+.dish-form select,
+.dish-form textarea {
+  padding: 0.65rem;
   border-radius: 8px;
-  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  width: 100%;
 }
 
+/* Full width rows */
+.dish-form textarea,
+.time-group,
+.file-group,
+.preview,
+.modal-actions {
+  grid-column: span 2;
+}
+
+/* Time inputs */
+.time-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Image preview */
 .preview {
-  margin-top: 0.5rem;
-  width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
 }
 
+/* ===============================
+   MODAL ACTIONS
+================================ */
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .modal-actions button {
-  padding: 0.6rem 1rem;
-  border: none;
+  padding: 0.5rem 1.2rem;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .modal-actions button[type="submit"] {
-  background: #28a745;
-  color: white;
-}
-
-.modal-actions button[type="submit"]:hover {
-  background: #218838;
+  background: #007bff;
+  color: #ffffff;
 }
 
 .modal-actions button[type="button"] {
-  background: #ddd;
+  background: #e0e0e0;
 }
-
-.modal-actions button[type="button"]:hover {
-  background: #ccc;
-}
-
-/* Save All */
-.save-all {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.save-btn {
-  padding: 0.8rem 1.5rem;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.save-btn:hover {
-  background: #0069d9;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+.modal-actions button[type="submit"]:hover {
+  background: #0056b3;
 }

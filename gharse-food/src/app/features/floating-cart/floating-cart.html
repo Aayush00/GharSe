@@ -1,0 +1,34 @@
+<!-- FLOATING CART BUTTON -->
+<button
+  class="floating-cart"
+  *ngIf="cartCount > 0"
+  (click)="goToCart()"
+>
+  🛒
+  <span class="badge">{{ cartCount }}</span>
+</button>
+
+
+<!-- CHEF SELECTOR BACKDROP -->
+<div
+  class="chef-selector-backdrop"
+  *ngIf="showChefSelector"
+  (click)="closeSelector()"
+></div>
+
+
+<!-- CHEF SELECTOR MODAL -->
+<div class="chef-selector" *ngIf="showChefSelector">
+
+  <h3>Select Chef</h3>
+
+  <div
+    class="chef-option"
+    *ngFor="let chef of chefSummary"
+    (click)="openChefCart(chef.chefId)"
+  >
+    <span>{{ chef.chefName }}</span>
+    <span class="count">{{ chef.count }} items</span>
+  </div>
+
+</div>

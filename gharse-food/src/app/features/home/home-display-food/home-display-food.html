@@ -2,27 +2,19 @@
   <h2 class="title">🍲 Explore Our Special Dishes</h2>
 
   <div class="food-container">
-    <div class="food-card" *ngFor="let food of foods">
+    <div class="food-card" *ngFor="let food of foods; let i = index">
       <div class="food-img">
-        <img [src]="food.image" alt="{{ food.name }}" />
-        <div class="rating">⭐ {{ food.rating }}</div>
+        <img [src]="food.image ? food.image : getRandomImage(i)" alt="{{ food.name }}" />
+        <span class="rating">⭐ {{ food.rating || 4.5 }}</span>
       </div>
 
       <div class="food-details">
-        <h3><i class="fas fa-utensils"></i> {{ food.name }}</h3>
-        <p class="chef-name"><i class="fas fa-user"></i> {{ food.chefName }}</p>
-        <p class="desc"><i class="fas fa-info-circle"></i> {{ food.description }}</p>
+        <h3>{{ food.name }}</h3>
 
-        <div class="price">
-          <i class="fas fa-tag"></i> ₹{{ food.price }}
-        </div>
+        <p class="chef-name">👨‍🍳 {{ food.chefName }}</p>
+
+        <div class="price">₹{{ food.price }}</div>
       </div>
     </div>
-  </div>
-
-  <!-- Loader -->
-  <div class="loader" *ngIf="isLoading">
-    <div class="spinner"></div>
-    <p>Loading more delicious foods...</p>
   </div>
 </div>
